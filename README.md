@@ -9,7 +9,7 @@ Purpose of the program and excercise:
  
  Once the list of sites has been populate the second step is to utilize a secondary thread which iterates through the list, checks the site for the requirements and then logs the result. This is done utilizing the Java TimerTask and Timer classes. The class which iterates through the list implements the TimerTask abstract class which is scheduled using the Timer. This requires that the polling frequency is infrequent enough so that it is longer than the duration required to iterate through the list of sites.
  
- The scheduled task iterates through the list and logs the results into a file. The log entries use the following format: The address of the website - The status: Either "Success", "Connection Failed" or "Requirements not met" - The time taken to complete the request
+ The scheduled task iterates through the list and logs the results into a file. The log entries use the following format: Current Date - The address of the website - The status: Either "Success", "Connection Failed" or "Requirements not met" - The time taken to complete the request
 
 How to use:
 ----
@@ -30,9 +30,9 @@ How to use:
 Step by step:
 ----
  * Run program.
- * When prompted enter 1 or 2 to use the default configuration file or a custom one.
- * If using a custom configuration file name enter the name of the file with ".xml" included. Please see xml formatting above.
- * When prompted enter the name of the log file.
- * Allow program to run as desired.
- * enter "quit" to gracefully exit when desired.
+ * When prompted enter 1 or 2 to use the default xml configuration file or a custom one.
+	- If using a custom configuration file name enter the name of the file with ".xml" included. Please see xml formatting above.
+ * When prompted enter the name of the log file including ".txt" or other desired text/log file type.
+ * Allow program to run as long as desired.
+ * Enter "quit" to exit.
   

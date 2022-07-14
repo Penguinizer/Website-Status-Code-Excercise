@@ -17,7 +17,6 @@ import java.io.InputStreamReader;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Timer;
@@ -168,7 +167,7 @@ public class WebStatusMain {
 	// the variable returns something usable at which point the value is returned.
 	private static String readInput() {
 		BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
-		String s = null;
+		String s=null;
 		do{
 			try {
 				s = stdin.readLine();
