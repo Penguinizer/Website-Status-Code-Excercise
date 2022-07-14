@@ -1,0 +1,21 @@
+<config>
+	<pollingrate>120</pollingrate>
+	<sitelist>
+		<site name="Google">
+			<address>https://www.google.fi</address>
+			<requirement>Google</requirement>
+		</site>
+		<site name="Sanoma">
+			<address>https://www.sanoma.com/</address>
+			<requirement>We impact the lives of millions of people every day.</requirement>
+		</site>
+		<site name="SanomaWithWrongString">
+			<address>https://www.sanoma.com/</address>
+			<requirement>This is a string that should not exist on the site hopefully?</requirement>
+		</site>
+		<site name="Non-Existent Site">
+			<address>https://www.ThisIsAFakeSiteAddressThatShouldNotExist.com</address>
+			<requirement>This string should not matter.</requirement>
+		</site>
+	</sitelist>
+</config>
