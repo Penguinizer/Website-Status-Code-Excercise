@@ -1,5 +1,5 @@
 <config>
-	<pollingrate>120</pollingrate>
+	<pollingrate>60</pollingrate>
 	<sitelist>
 		<site name="Google">
 			<address>https://www.google.fi</address>

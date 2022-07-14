@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
@@ -31,8 +32,10 @@ import org.xml.sax.SAXException;
 
 
 public class WebStatusMain {
-	protected int pollingRate; //Note: in seconds
-	protected List<Entry<String, String>> siteMap = new ArrayList<Entry<String,String>>();
+	protected static int pollingRate; //Note: in seconds
+	protected static List<Entry<String, String>> siteMap = new ArrayList<Entry<String,String>>();
+	protected static Timer pollTimer;
+	protected static PollingTask pollTask;
 	
 	//The main function which calls the xml parser and polling timertask.
 	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
@@ -48,6 +51,19 @@ public class WebStatusMain {
 				+ "Please enter name of log file: ");
 		String logName = readInput();
 		
+		//Create the timer and TimerTask.
+		//The TimerTask is executed based on the timer.
+		//Pass the logName input to the task while initializing.
+		pollTimer = new Timer();
+		pollTask = new PollingTask(logName, siteMap);
+		
+		//Use the timer to schedule the timertask.
+		//Multiply Pollingrate by a thousand as the delay is in milliseconds.
+		pollTimer.scheduleAtFixedRate(pollTask, new Date(),pollingRate*1000);
+		
+		//Enter a menu function which allows the user to gracefully exit.
+		//Other functionality could also be added if wanted.
+		myMain.menu();
 	}
 	
 	//Utility functions
@@ -120,6 +136,31 @@ public class WebStatusMain {
 			//Use Put to append the address and requirement to the list of entries.
 			siteMap.add(new SimpleEntry<String, String>(tmpAddress, tmpReq));
 		}
+	}
+	
+	//A function which handles the menu functionality.
+	//Called by the main function after the timer and timertasks are set up and started.
+	private void menu() {
+		String userAction;
+		//A simple do-while menu which waits for the user to input.
+		//Presently only has a graceful quit option which terminates the timed task and timer before allowing execution to end by returning.
+		do {
+			System.out.println("Input \"quit\" to close the program.");
+			try {
+				userAction = readInput();
+				if (userAction.equals("quit")) {
+					System.out.println("Exiting program.");
+					pollTask.cancel();
+					pollTimer.cancel();
+					return;
+				}
+				else {
+					continue;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}while(true);
 	}
 	
 	//A function for reading the user's input.
