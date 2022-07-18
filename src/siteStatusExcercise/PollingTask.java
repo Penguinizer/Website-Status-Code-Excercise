@@ -31,11 +31,13 @@ import java.util.Map.Entry;
 public class PollingTask extends TimerTask{
 	protected String logName;
 	protected List<Entry<String, String>> siteMap;
+	protected HTMLInterface pageInterface;
 	
 	//Constructor which saves the site map and log file name to object variables.
 	public PollingTask(String inLogName, List<Entry<String, String>> inSiteMap) {
 		this.logName=inLogName;
 		this.siteMap=inSiteMap;
+		this.pageInterface = new HTMLInterface();
 	}
 	
 	//The run function is called by the timer at a fixed rate configured by the file.
@@ -110,7 +112,8 @@ public class PollingTask extends TimerTask{
 				e.printStackTrace();
 			}
 		}
-		
+		//Update the HTML interface age.
+		pageInterface.updatePage();
 	}
 	
 	//Utility functions.
@@ -121,8 +124,11 @@ public class PollingTask extends TimerTask{
 			//Create a new writer for the logfile name the user entered.
 			Writer logWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(logName, true), "utf-8"));
 			//Write the given string into the file and then close the writer.
-			logWriter.write(LocalDateTime.now() + " - " + logString + "\n");
+			String tempString = LocalDateTime.now() + " - " + logString;
+			logWriter.write(tempString+"\n");
 			logWriter.close();
+			//Push the server status string to the HTML Page server status list.
+			pageInterface.pushStatusToTable(tempString);
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
