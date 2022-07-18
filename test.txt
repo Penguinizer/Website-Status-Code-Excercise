@@ -1,0 +1,4 @@
+2022-07-18T12:26:06.298971500 - https://www.google.fi - Success: Requirements met. - PT0.3382071S
+2022-07-18T12:26:06.655824300 - https://www.sanoma.com/ - Success: Requirements met. - PT0.3448414S
+2022-07-18T12:26:07.018211200 - https://www.sanoma.com/- Requirements not met: Site does not contain required phrase. - PT0.3184413S
+2022-07-18T12:26:07.021994400 - https://www.ThisIsAFakeSiteAddressThatShouldNotExist.com - Failed to connect: UnknownHostException encountered. Site is presently unavailable.

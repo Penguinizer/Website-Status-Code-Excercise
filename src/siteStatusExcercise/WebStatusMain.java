@@ -45,10 +45,13 @@ public class WebStatusMain {
 		System.out.println("Calling xml file parsing function.");
 		myMain.parseXML();
 		
-		//After populating the list creating the Timer and TimerTasks.
-		System.out.print("Creating Timer and Timed Task to poll sites from file.\n"
-				+ "Please enter name of log file: ");
+		//After populating the list creating read the log name from the user.
+		//
+		System.out.print("Please enter name of log file: ");
 		String logName = readInput();
+		if (!logName.contains(".txt")) {
+			logName+=".txt";
+		}
 		
 		//Create the timer and TimerTask.
 		//The TimerTask is executed based on the timer.
@@ -87,6 +90,9 @@ public class WebStatusMain {
 			}
 			else if (tmpint == 2) {
 				fileName = readInput();
+				if (!fileName.contains(".xml")) {
+					fileName+=".xml";
+				}
 				break;
 			}
 			else {
@@ -104,6 +110,10 @@ public class WebStatusMain {
 		
 		//Parse the polling rate from the configuration file.
 		pollingRate = Integer.parseInt(xmlRoot.getElementsByTagName("pollingrate").item(0).getTextContent());
+		if (pollingRate<1) {
+			System.out.println("Please enter a positive or large enough value for the polling rate. Setting to default value of 60.");
+			pollingRate=60;
+		}
 		//System.out.println("Polling rate: " + pollingRate);
 		
 		//Get the list of site nodes from the root, create temporary variables for iterating.
